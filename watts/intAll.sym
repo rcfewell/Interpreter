@@ -1,0 +1,95 @@
+Input file: intAll.in
+
+Symbol Table Variables:
+	a               INTEGER        4
+	b               INTEGER        4
+	c               INTEGER        6
+	d               INTEGER        4
+	e               INTEGER        4
+	f               INTEGER       -4
+	g               INTEGER        0
+	h               INTEGER       24
+	i               INTEGER        1
+	j               INTEGER        2
+	k               INTEGER       10
+	l               INTEGER        2
+	m               INTEGER       96
+	n               INTEGER        0
+	o               INTEGER        0
+	p               INTEGER        0
+	q               INTEGER        5
+	r               INTEGER       -3
+	s               INTEGER        0
+	t               INTEGER        0
+	u               INTEGER        0
+	v               INTEGER       32
+	w               INTEGER        0
+	x               INTEGER        0
+	y               INTEGER        5
+	z               INTEGER        4
+
+Symbol Table Numbers:
+	5               INTEGER        5
+
+Symbol Table Temporaries:
+	$0              INTEGER        5
+	$1              INTEGER        5
+	$2              INTEGER        4
+	$3              INTEGER       -4
+	$4              INTEGER        0
+	$5              INTEGER       24
+	$6              INTEGER        1
+	$7              INTEGER        2
+	$8              INTEGER       10
+	$9              INTEGER        2
+	$10             INTEGER       96
+	$11             INTEGER        0
+	$12             INTEGER        0
+	$13             INTEGER        0
+	$14             INTEGER        1
+	$15             INTEGER        1
+	$16             INTEGER        0
+	$17             INTEGER        1
+	$18             INTEGER        4
+	$19             INTEGER        2
+	$20             INTEGER        6
+	$21             INTEGER        1
+	$22             INTEGER        1
+
+Symbol Table Operands:
+	++      POSTPP           1       1     LEFT_TO_RIGHT  INTEGER   NONE      
+	--      POSTMM           1       1     LEFT_TO_RIGHT  INTEGER   NONE      
+	++      PREPP            1       2     RIGHT_TO_LEFT  INTEGER   NONE      
+	--      PREMM            1       2     RIGHT_TO_LEFT  INTEGER   NONE      
+	+       UPLUS            1       2     RIGHT_TO_LEFT  DOUBLE    NONE      
+	-       UMINUS           1       2     RIGHT_TO_LEFT  DOUBLE    NONE      
+	!       NEGATION         1       2     RIGHT_TO_LEFT  DOUBLE    NONE      
+	*       MULTIPLY         2       3     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	/       DIVIDE           2       3     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	%       REMAINDER        2       3     LEFT_TO_RIGHT  INTEGER   INTEGER   
+	+       BPLUS            2       4     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	-       BMINUS           2       4     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	<<      SHIFTLEFT        2       5     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	>>      SHIFTRIGHT       2       5     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	<       LESSTHAN         2       6     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	<=      LESSTHANEQ       2       6     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	>       GREATERTHAN      2       6     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	>=      GREATERTHANEQ    2       6     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	==      EQUAL            2       7     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	!=      NOTEQUAL         2       7     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	&       BITAND           2       8     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	^       BITXOR           2       9     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	|       BITOR            2      10     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	&&      LOGICALAND       2      11     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	||      LOGICALOR        2      12     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	=       ASSIGNMENT       2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	+=      PLUSEQUAL        2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	-=      MINUSEQUAL       2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	*=      MULTEQUAL        2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	/=      DIVEQUAL         2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	%=      REMEQUAL         2      14     RIGHT_TO_LEFT  INTEGER   INTEGER   
+	<<=     SHIFTLEFTEQUAL   2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	>>=     SHIFTRIGHTEQUAL  2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	&=      BITANDEQUAL      2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	^=      BITXOREQUAL      2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	|=      BITOREQUAL       2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    

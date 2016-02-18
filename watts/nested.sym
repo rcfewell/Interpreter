@@ -1,0 +1,63 @@
+Input file: nested.in
+
+Symbol Table Variables:
+	a               INTEGER        3
+	b               INTEGER       12
+	c               INTEGER       30
+	d               INTEGER      -18
+	e               INTEGER       22
+
+Symbol Table Numbers:
+	0.5             DOUBLE         0.50
+	12              INTEGER       12
+	2               INTEGER        2
+	3               INTEGER        3
+
+Symbol Table Temporaries:
+	$0              INTEGER       15
+	$1              INTEGER       30
+	$2              INTEGER       -9
+	$3              INTEGER       15
+	$4              INTEGER     -270
+	$5              INTEGER      -18
+	$6              INTEGER       15
+	$7              DOUBLE         7.50
+	$8              DOUBLE        22.50
+
+Symbol Table Operands:
+	++      POSTPP           1       1     LEFT_TO_RIGHT  INTEGER   NONE      
+	--      POSTMM           1       1     LEFT_TO_RIGHT  INTEGER   NONE      
+	++      PREPP            1       2     RIGHT_TO_LEFT  INTEGER   NONE      
+	--      PREMM            1       2     RIGHT_TO_LEFT  INTEGER   NONE      
+	+       UPLUS            1       2     RIGHT_TO_LEFT  DOUBLE    NONE      
+	-       UMINUS           1       2     RIGHT_TO_LEFT  DOUBLE    NONE      
+	!       NEGATION         1       2     RIGHT_TO_LEFT  DOUBLE    NONE      
+	*       MULTIPLY         2       3     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	/       DIVIDE           2       3     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	%       REMAINDER        2       3     LEFT_TO_RIGHT  INTEGER   INTEGER   
+	+       BPLUS            2       4     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	-       BMINUS           2       4     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	<<      SHIFTLEFT        2       5     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	>>      SHIFTRIGHT       2       5     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	<       LESSTHAN         2       6     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	<=      LESSTHANEQ       2       6     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	>       GREATERTHAN      2       6     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	>=      GREATERTHANEQ    2       6     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	==      EQUAL            2       7     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	!=      NOTEQUAL         2       7     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	&       BITAND           2       8     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	^       BITXOR           2       9     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	|       BITOR            2      10     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	&&      LOGICALAND       2      11     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	||      LOGICALOR        2      12     LEFT_TO_RIGHT  DOUBLE    DOUBLE    
+	=       ASSIGNMENT       2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	+=      PLUSEQUAL        2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	-=      MINUSEQUAL       2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	*=      MULTEQUAL        2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	/=      DIVEQUAL         2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	%=      REMEQUAL         2      14     RIGHT_TO_LEFT  INTEGER   INTEGER   
+	<<=     SHIFTLEFTEQUAL   2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	>>=     SHIFTRIGHTEQUAL  2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	&=      BITANDEQUAL      2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	^=      BITXOREQUAL      2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    
+	|=      BITOREQUAL       2      14     RIGHT_TO_LEFT  DOUBLE    DOUBLE    

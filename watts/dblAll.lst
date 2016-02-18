@@ -1,0 +1,30 @@
+Input file: dblAll.in
+   1: double a = 5;
+   2: double b = 5;
+   3: double c = 5;
+   4: double d = 5;
+   5: a++;
+   6: b--;
+   7: ++c;
+   8: --d;
+   9: double e = +b;
+  10: double f = -b;
+  11: double g = !b;
+  12: double h = a * b;
+  13: double i = a / b;
+  14: double k = a + b;
+  15: double l = a - b;
+  16: double o = a < b;
+  17: double p = a <= b;
+  18: double q = a > b;
+  19: double r = a >= b;
+  20: double s = a == b;
+  21: double t = a != b;
+  22: double x = a && b;
+  23: double y = a || b;
+  24: double z = a = b;
+  25: q += b;
+  26: r -= b;
+  27: s *= b;
+  28: t /= b;
+0 errors found in input file

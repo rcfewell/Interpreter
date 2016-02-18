@@ -1,0 +1,52 @@
+#include <stdio.h>
+double main ()
+{
+double a = 5;
+double b = 5;
+double c = 5;
+double d = 5;
+a++;
+b--;
+++c;
+--d;
+double e = +b;
+double f = -b;
+double g = !b;
+double h = a * b;
+double i = a / b;
+double k = a + b;
+double l = a - b;
+double o = a < b;
+double p = a <= b;
+double q = a > b;
+double r = a >= b;
+double s = a == b;
+double t = a != b;
+double x = a && b;
+double y = a || b;
+double z = a = b;
+q += b;
+r -= b;
+s *= b;
+t /= b;
+printf ("a = %.2f\n", a);
+printf ("b = %.2f\n", b);
+printf ("c = %.2f\n", c);
+printf ("d = %.2f\n", d);
+printf ("e = %.2f\n", e);
+printf ("f = %.2f\n", f);
+printf ("g = %.2f\n", g);
+printf ("h = %.2f\n", h);
+printf ("i = %.2f\n", i);
+printf ("k = %.2f\n", k);
+printf ("l = %.2f\n", l);
+printf ("o = %.2f\n", o);
+printf ("p = %.2f\n", p);
+printf ("q = %.2f\n", q);
+printf ("r = %.2f\n", r);
+printf ("s = %.2f\n", s);
+printf ("t = %.2f\n", t);
+printf ("x = %.2f\n", x);
+printf ("y = %.2f\n", y);
+printf ("z = %.2f\n", z);
+}

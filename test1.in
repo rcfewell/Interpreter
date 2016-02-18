@@ -1,0 +1,5 @@
+int three = 3;
+double twopointtwo = 2.2;
+
+int product = three * twopointtwo;
+double sum = three + twopointtwo;

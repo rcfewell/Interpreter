@@ -1,0 +1,389 @@
+#include <cstdlib>
+#include "SyntacticalAnalyzer.h"
+
+SyntacticalAnalyzer::~SyntacticalAnalyzer()
+{
+	cout << errors << " errors found in input file" << endl;
+}
+
+void SyntacticalAnalyzer::program()
+{
+	if (ct == EOFT)
+		return;
+
+	if (ct == ERROR)
+		ct = lex.get_token();
+
+	lex.debug << "Starting <program>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == INTTYPE || ct == DBLTYPE)
+		decl();
+	else
+		stmt();
+
+	if (ct == SEMI) {
+		sem.endEval();
+		ct = lex.get_token();
+	} else {
+		errors++;
+		lex.error_message("; expected");
+		lex.debug << "; expected" << endl;
+	}
+
+	more_stmts();
+
+	lex.debug << "ending <program>" << endl;
+	lex.debug << errors << " errors found in input file" << endl;
+	lex.output << errors << " errors found in input file" << endl;
+
+	sem.printTable();
+}
+
+void SyntacticalAnalyzer::more_stmts()
+{
+	if (ct == EOFT)
+		return; 
+	
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <more_stmts>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == INTTYPE || ct == DBLTYPE)
+		decl();
+	else
+		stmt();
+
+	if (ct == SEMI) {
+		sem.endEval();
+		ct = lex.get_token();
+	} else {
+		errors++;
+		lex.error_message("; expected");
+		lex.debug << "; expected" << endl;
+	}
+
+	more_stmts();
+
+	lex.debug << "Ending <more_stmts>" << endl;
+}
+
+void SyntacticalAnalyzer::stmt()
+{
+	if (ct == EOFT)
+		return; 
+	
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <stmt>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	term();
+	stmt_tail();
+
+	lex.debug << "Ending <stmt>" << endl;
+}
+
+void SyntacticalAnalyzer::decl()
+{
+	if (ct == EOFT)
+		return; 
+	
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <decl>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	ntype();
+
+	if (ct == IDENT) {
+		sem.checkSymbol(lex.get_lexeme());
+		ct = lex.get_token();
+		decl_tail();
+		more_decls();
+	} else {
+		errors++;
+		lex.error_message(" Identifier expected");
+		lex.debug << "Identifier expected" << endl;
+	}
+
+	lex.debug << "Ending <decl>" << endl;
+}
+
+void SyntacticalAnalyzer::ntype()
+{
+	if (ct == EOFT)
+		return; 
+	
+	if (ct == ERROR)
+		ct = lex.get_token();
+
+	lex.debug << "Starting <ntype>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == INTTYPE || ct == DBLTYPE) {
+		sem.endEval();
+		sem.lastType = ct;
+		ct = lex.get_token();
+	} else {
+		errors++;
+		lex.error_message("Int or double expected");
+		lex.debug << "declaration expected" << endl;
+	}
+
+	lex.debug << "Ending <ntype>" << endl;
+}
+
+void SyntacticalAnalyzer::decl_tail()
+{
+	if (ct == EOFT)
+		return; 
+	
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <decl_tail>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == ASSIGN) {
+		sem.startEval();
+		ct = lex.get_token();
+		stmt();
+	} else {
+		errors++;
+		lex.error_message("= expected");
+		lex.debug << "= expected" << endl;
+	}
+
+	lex.debug << "Ending <decl_tail>" << endl;
+}
+
+void SyntacticalAnalyzer::more_decls()
+{
+	if (ct == EOFT)
+		return; 
+	
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <more_decls>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == COMMA) {
+		ct = lex.get_token();
+
+		if (ct == IDENT) {
+			sem.checkSymbol(lex.get_lexeme());
+			ct = lex.get_token();
+			decl_tail();
+			more_decls();
+		} else {
+			errors++;
+			lex.error_message("Identifier expected");
+			lex.debug << "Identifier expected" << endl;
+		}
+	}
+
+	lex.debug << "Ending <more_decls>" << endl;
+}
+
+void SyntacticalAnalyzer::term()
+{
+	if (ct == EOFT)
+		return;
+	
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <term>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == LPAREN) {
+		ct = lex.get_token();
+		stmt();
+
+		if (ct == RPAREN)
+			ct = lex.get_token();
+		else {
+			errors++;
+			lex.error_message(") expected.");
+			lex.debug << ") expected" << endl;
+		}
+	} else {
+		pre();
+		var();
+		post();
+	}
+
+	lex.debug << "Ending <term>" << endl;
+}
+
+void SyntacticalAnalyzer::pre()
+{
+	if (ct == EOFT)
+		return; 
+
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <pre>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+
+	if (ct == PLUS || ct == MINUS || ct == NOT || ct == TILDA || ct == PLUSPLUS || ct == MINUSMINUS) {
+		uoppre();
+		pre();
+	}
+
+	lex.debug << "Ending <pre>" << endl;
+}
+
+void SyntacticalAnalyzer::uoppre()
+{
+	if (ct == EOFT)
+		return; 
+
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <uoppre>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == PLUS || ct == MINUS || ct == NOT || ct == TILDA || ct == PLUSPLUS || ct == MINUSMINUS)
+		ct = lex.get_token();
+	else {
+		errors++;
+		lex.error_message("Unary operator expected");
+		lex.debug << "unary operator expected" << endl;
+	}
+
+	lex.debug << "Ending <uoppre>" << endl;
+}
+
+void SyntacticalAnalyzer::var()
+{
+	if (ct == EOFT)
+		return; 
+
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <var>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme:" << lex.get_lexeme() << endl;
+
+	if (ct == IDENT || ct == NUMLIT) {
+		if (ct == IDENT) 
+			sem.checkSymbol(lex.get_lexeme());
+		if (ct == NUMLIT && sem.evaluating) {
+			string l = lex.get_lexeme();
+			int n = atoi(l.c_str());
+			sem.foundNumLit(n);
+		}
+
+		ct = lex.get_token();
+	} else {
+		errors++;
+		lex.error_message("Identifier or numeric literal expected");
+		lex.debug << "Identifier or numlit expected" << endl;
+	}
+
+	lex.debug << "Ending <var>" << endl;
+}
+
+void SyntacticalAnalyzer::post()
+{
+	if (ct == EOFT)
+		return; 
+	
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <post>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == PLUSPLUS || ct == MINUSMINUS)
+		ct = lex.get_token();
+
+	lex.debug << "Ending <post>" << endl;
+}
+
+void SyntacticalAnalyzer::stmt_tail()
+{
+	if (ct == EOFT)
+		return; 
+	
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <stmt_tail>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == PLUS || ct == MINUS || ct == MULT || ct == DIV || ct == MOD ||
+		ct == AND || ct == OR || ct == XOR || ct == ASSIGN || ct == LT ||
+		ct == GT || ct == SHIFTL || ct == SHIFTR || ct == PLUSEQ || ct == MINUSEQ ||
+		ct == MULTEQ || ct == DIVEQ || ct == MODEQ || ct == NOTEQ || ct == LOGAND ||
+		ct == ANDEQ || ct == LOGOR || ct == OREQ || ct == XOREQ || ct == EQUALTO ||
+		ct == SHIFTLEQ || ct == LTE || ct == SHIFTREQ || ct == GTE || ct == COMMA ||
+		ct == EXP || ct == EXPEQ) {
+		
+		binop();
+		stmt();
+	} else if (ct == QUEST) {
+		ct = lex.get_token();
+		stmt();
+
+		if (ct == COLON) {
+			ct = lex.get_token();
+			stmt();
+		} else {
+			errors++;
+			lex.error_message(": expected");
+			lex.debug << ": expected" << endl;
+		}
+	}
+
+	lex.debug << "Ending <stmt_tail>" << endl;
+}
+
+void SyntacticalAnalyzer::binop()
+{
+	if (ct == EOFT)
+		return; 
+	
+	if (ct == ERROR) 
+		ct = lex.get_token();
+
+	lex.debug << "Starting <binop>" << endl;
+	lex.debug << "token: " << lex.get_token_name(ct) << " Lexeme: " << lex.get_lexeme() << endl;
+
+	if (ct == PLUS || ct == MINUS || ct == MULT || ct == DIV || ct == MOD ||
+		ct == AND || ct == OR || ct == XOR || ct == ASSIGN || ct == LT ||
+		ct == GT || ct == SHIFTL || ct == SHIFTR || ct == PLUSEQ || ct == MINUSEQ ||
+		ct == MULTEQ || ct == DIVEQ || ct == MODEQ || ct == NOTEQ || ct == LOGAND ||
+		ct == ANDEQ || ct == LOGOR || ct == OREQ || ct == XOREQ || ct == EQUALTO ||
+		ct == SHIFTLEQ || ct == LTE || ct == SHIFTREQ || ct == GTE || ct == COMMA ||
+		ct == EXP || ct == EXPEQ) {
+
+		if (ct == ASSIGN)
+			sem.startEval();
+		else
+			sem.foundOperator(ct);
+
+		ct = lex.get_token();
+	}
+	else {
+		errors++;
+		lex.error_message("Binary operator expected");
+		lex.debug << "Binary operator expected" << endl;
+	}
+
+	lex.debug << "Ending <binop>" << endl;
+}
+
+
+
+

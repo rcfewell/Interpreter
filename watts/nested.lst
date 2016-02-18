@@ -1,0 +1,7 @@
+Input file: nested.in
+   1: int a = 3;
+   2: int b = 12;
+   3: int c = 2 * (a + b);
+   4: int d = c * (a - b) / (a + b);
+   5: int e = (c - (a + b) * 0.5);
+0 errors found in input file

@@ -1,0 +1,7 @@
+Input file: test1.in
+   1: int three = 3;
+   2: double twopointtwo = 2.2;
+   3: 
+   4: int product = three * twopointtwo;
+   5: double sum = three + twopointtwo;
+0 errors found in input file
